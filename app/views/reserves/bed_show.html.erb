@@ -1,0 +1,44 @@
+<div id="main">
+  <article>
+    <div class="button-modoru-box">
+      <%= link_to "戻る", 'javascript:history.back()', method: :get, class: "button-modoru" %>
+    </div>
+    <h2>詳細ページ</h2>
+
+    <!-- <p class="c"><%= @oaccount.office_name%>の空き状況</p>  -->
+    <h3><%= @oaccount.office_name%>の空き状況</h3>
+
+    <!-- <figure class="mb30"><img src="images/sample1.jpg" alt="ここにショートステイの絵を入れる"></figure> -->
+    <div class="c">
+      <%= link_to "この施設に申し込む", new_reserf_path(office_id: params[:id]), method: :get, class: "button-v1" %>
+    </div>
+    <br>
+    <table class="ta1">
+      <caption>詳細情報</caption>
+      <tr>
+      <th>ベッド数</th>
+      <td><%= @oaccount.office_bed_count %>床</td>
+      </tr>
+      <tr>
+      <th>部屋の種類</th>
+      <td>個室</td>
+      </tr>
+    </table>
+    <% @calendars.each do |calendar| %>
+      <%= month_calendar(start_date: calendar[:beginning_of_month]) do |date| %>
+        <%= date.strftime("%m/%d") %><br>
+        <% if Date.today > date %>
+          <%= "-" %>
+        <% else %>
+          <%= link_to(calendar[:reserve_statuses][date][:status], new_reserf_path(office_id: params[:id], date: date.strftime("%Y-%m-%d"))) %>
+        <% end %>
+      <% end %>
+      <br>
+    <% end %>
+    <div class="c">
+      <%= link_to "この施設に申し込む", new_reserf_path(office_id: params[:id]), method: :get, class: "button-v1" %>
+    </div>
+
+  </article>
+</div>
+<!--/#main -->

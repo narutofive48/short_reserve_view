@@ -1,0 +1,2 @@
+class ShortageBedError < StandardError
+end

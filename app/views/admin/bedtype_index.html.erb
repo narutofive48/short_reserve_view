@@ -1,0 +1,19 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+  <section>
+
+    <h2>ベッドの種類　一覧表</h2>
+
+    <% @bedtypes.each do |bedtype| %>
+      <div class="list link">
+        <h4><%= bedtype.id %>　<%= bedtype.bed_type %></h4>
+        <p><%= link_to("ベッドの種類を変更する", edit_bedtype_admin_path(bedtype.id)) %></p>
+        <p><%= button_to("ベッドの種類を削除する", delete_bedtype_admin_path(bedtype.id), method: :post, class: "button-v2") %></p>
+      </div>
+    <% end %>
+
+  </section>
+
+</div>
+<!--/#main-->

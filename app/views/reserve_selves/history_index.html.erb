@@ -1,0 +1,31 @@
+<div id="main">
+
+  <section>
+
+    <h2>過去3ヶ月分の予約リストです</h2>
+    <p>入所日順に表示されています</p>
+
+    <% @reserves.each do |reserve| %>
+      <div class="list link">
+        <div class="listinboxA">
+          <div class="listinboxr2">
+            <h4>№<%= reserve.id %> <%= reserve.display_user_name %></h4>
+            <p><i class="zmdi zmdi-account"></i>　<%= "#{reserve.client_name}様" if reserve.client_name.present? %></p>
+            <p><%= link_to("予約期間#{reserve.start_date}〜#{reserve.end_date}", reserve_show_reserve_self_path(reserve.id)) %>
+            <p>備考 <%= reserve.remark %></p>
+          </div>
+          <div class="listinboxr3">
+            <p>予約状況：<%= reserve.entry_flg %></p>
+            <i class="zmdi zmdi-city"></i> <%= reserve.display_user_office %><br>
+            <i class="zmdi zmdi-phone"></i> <%= reserve.display_user_phone %><br>
+            予約日： <%= reserve.created_at.strftime("%Y/%m/%d") %>
+          </div>
+        </div>
+
+       </div>
+    <% end %>
+  <%= paginate @reserves %>
+  </section>
+
+</div>
+<!--/#main-->

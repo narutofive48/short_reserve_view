@@ -1,0 +1,59 @@
+			<div id="main">
+
+				<!--スライドショー-->
+				<aside id="mainimg">
+					<%= image_tag "/images/1.jpg", alt: "", id: "assets", class: "slide0" %>
+					<%= image_tag "/images/2.jpg", alt: "", id: "assets", class: "slide1" %>
+					<%= image_tag "/images/3.jpg", alt: "", id: "assets", class: "slide2" %>
+				</aside>
+
+				<section>
+					<% if @user_in || @office_in %>
+						<h2>更新情報／お知らせ</h2>
+						<% if @notices.present? %>
+							<% @notices.each do |notice| %>
+								<%= link_to(notice.notice_text, notice.link_to, method: :GET) %>
+								<br>
+							<% end %>
+						<% else %>
+							<p>お知らせはありません</p>
+						<% end %>
+					<% end %>
+
+					<% if @office_in %>
+						<h2>ケアマネからの案件</h2>
+						<div class="list link">
+							<% if @matters.present? %>
+								<% @matters.each do |matter| %>
+									<div class="list link">
+										<h4>依頼番号<%= matter.id %>　<%= matter.uaccount.user_office %></h4>
+										<p><%= link_to("予約期間#{matter.start_date}〜#{matter.end_date}", matter_show_reserve_self_path(matter.id),method: :GET) %></p>
+										<p>概要：<%= matter.remark %></p>
+									</div>
+								<% end %>
+							<% else %>
+								<p>ケアマネからの案件はありません</p>
+							<% end %>
+						</div>
+					<% end %>
+					<h2>ショートステイをご予約される前に必ずお読み下さい</h2>
+
+					<h3>システムのご案内</h3>
+					<p>このシステムは、ケアマネジャーがショートステイを予約するためのシステムです。</p>
+					<p><span class="color1">■<strong>ここで新規の利用者の予約をされる方は必ず事業所にご連絡ください</strong></span><br>
+					新規の利用者さんは予約できますが、事業所に連絡をしない場合はキャンセルになる可能性がありますのでご注意ください。</p>
+
+					<h3>個人情報について</h3>
+					<p>ここで入力するお名前については、ニックネームや苗字だけにしてください<br>
+					居宅介護支援事業所の名前と連絡先は正確にご入力ください。</p>
+
+					<h3>人物写真について</h3>
+					<p>人物の写真は登録しなくても、システムを利用することは可能です。<br>
+					他者の写真を掲載する場合は、許可をいただくようにお願いいたします。</p>
+
+
+				</section>
+
+
+			</div>
+			<!--/#main-->

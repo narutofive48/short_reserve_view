@@ -1,0 +1,28 @@
+<div id="main">
+
+	<section>
+			<div class="button-modoru-box">
+				<%= link_to "戻る", 'javascript:history.back()', method: :get, class: "button-modoru" %>
+			</div>
+			<table class="ta1">
+				<tr>
+					<th>ケアマネジャー</th>
+					<td><%= @matter.uaccount.user_name %></td>
+				</tr>
+				<tr>
+					<th>開始日</th>
+					<td><%= @matter.start_date %></td>
+				</tr>
+				<tr>
+					<th>終了日</th>
+					<td><%= @matter.end_date %></td>
+				</tr>
+				<tr>
+					<th>ショートステイ依頼内容</th>
+					<td><%= @matter.remark %></td>
+				</tr>
+			</table>
+	</section>
+
+</div>
+<!--/#main-->

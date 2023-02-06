@@ -1,0 +1,2 @@
+module Uaccounts::NoticesHelper
+end

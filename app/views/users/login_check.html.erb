@@ -1,0 +1,25 @@
+<div id="main">
+
+	<section>
+
+            <h2>ケアマネログイン</h2>
+                  <%= form_tag("/users/login") do %>
+                        <table class="ta1">
+                              <tr>
+                                    <th>e-mail</th>
+                                    <td><input type="text" name="office_email" size="30" class="ws"></td>
+                              </tr>
+                              <tr>
+                                    <th>パスワード</th>
+                                    <td><input type="password" name="password" size="30" class="ws"></td>
+                              </tr> 
+                        </table>
+
+                        <p class="c">
+                              <input type="submit" value="ログイン" class="btn">
+                        </p>
+                  <% end %>
+
+	</section>
+</div>
+<!--/#main-->

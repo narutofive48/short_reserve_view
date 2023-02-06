@@ -1,0 +1,18 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+	<section>
+		<%= form_with(model: @bedtype, url: new_bedtype_update_admin_index_path, method: :POST) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>ベッドの種類</th>
+					<td><%= f.text_area :bed_type, size: "10", class:"wl" %></td>
+				</tr>
+			</table>
+			<p class="c">
+				<%= f.submit "ベッドの種類を新規登録する", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>

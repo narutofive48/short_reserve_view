@@ -1,0 +1,45 @@
+<div id="main">
+
+<section>
+
+	<h2>施設のご案内</h2>
+	<p>施設のご案内ページです。</p>
+
+	<% @oaccounts.each do |oaccounts| %>
+
+		<div class="list link">
+			<figure>
+				<%= link_to( main_path(oaccounts.id) ) do %>
+					<% if oaccounts.thumbnail.attached? %>
+						<%= image_tag url_for(oaccounts.thumbnail) %>
+					<% else %>
+						<img src="/images/6.jpg" alt="">
+					<% end %>
+				<% end %>
+			</figure>
+			<div class="listinboxA">
+				<div class="listinbox2">
+
+					<h4><%= link_to(oaccounts.office_name, main_path(oaccounts.id)) %></h4>
+					<p><%= link_to("ショートステイの空き状況はこちら", bed_show_reserf_path(oaccounts.id)) %></p>
+					<p><%= oaccounts.office_apear.truncate(65) %></p>
+				</div>
+				<div class="listinbox3">
+					<br>
+					<i class="zmdi zmdi-pin"></i> <%= oaccounts.office_city&.city_name %><br>
+					<i class="zmdi zmdi-home"></i> <%= oaccounts.office_bed_count %>床<br>
+					<i class="zmdi zmdi-hotel"></i> <%= oaccounts.bed_type&.bed_type %>
+					<% if @favorite_oaccount_ids.include?(oaccounts.id) %>
+						<%= button_to("お気に入り解除", destroy_favorites_path(oaccount_id: oaccounts.id), method: :delete ) %>
+					<% else %>
+						<%= button_to("お気に入り登録", favorites_path(oaccount_id: oaccounts.id), method: :post ) %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	<% end %>
+
+</section>
+
+</div>
+<!--/#main-->

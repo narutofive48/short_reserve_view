@@ -1,0 +1,18 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+	<section>
+		<%= form_with(model: @prefecture, url: admin_prefecture_path, method: :DELETE) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>都道府県</th>
+					<td><%= f.hidden_field :prefecture %><%= @prefecture.prefecture %></td>
+				</tr>
+			</table>
+			<p class="c">
+				<%= f.submit "この県を削除してもいいですか？", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>

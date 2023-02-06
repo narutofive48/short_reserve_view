@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N3K2DT2L75"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-N3K2DT2L75');
+    </script>
+
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  	<title>ショートステイ予約システム</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <%= javascript_pack_tag 'select2' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'openclose' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+
+  </head>
+
+  <body>
+  	<div id="container">
+
+      <header>
+        <div class="inner">
+          <h1 id="logo"><%= link_to image_tag("/images/logo.png", alt:"ショートステイ予約システム"), main_index_path %></h1>
+          <ul id="headermenu">
+            <% if @office_in%>
+              <li><%= current_oaccount.office_name %> 様</li>
+              <li><span>事業所ログイン中</span></li>
+            <% elsif @administrator_in %>
+                <li><%= link_to "管理者ログアウト", destroy_administrator_session_path %></li>
+            <% elsif @user_in %>
+                <li><%= current_uaccount.user_name %> 様</li>
+                <li><%= link_to "ログアウト", destroy_uaccount_session_path %></li>
+            <% else %>
+                <li>【ケアマネ】</li>
+                <li><%= link_to 'ログイン', uaccount_session_path(back_url: request.fullpath) %></li>
+                <li><%= link_to "新規登録", new_uaccount_registration_path %></li>
+            <% end %>
+          </ul>
+        </div>
+        <h2><%= @signed_in %></h2>
+        <!--/.inner-->
+      </header>
+
+
+        <!--メインメニューなし-->
+        <% [["menubar", "inner"],["menubar-s", ""]].each do |nav_id, ul_class| %>
+          <nav id="<%= nav_id %>">
+            <ul class="<%= ul_class %>">
+              <% @menu_bar.each do |path, name| %>
+                <li class="<%="current" if path==request.fullpath %> ">
+                  <%= link_to(name, path)%>
+                </li>
+              <% end %>
+            </ul>
+          </nav>
+        <% end %>
+
+      <div id="contents" class="inner">
+        <% if flash[:notice] %>
+          <div class="flash">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+
+        <%= yield %>
+
+      </div>
+    </div>
+    <footer>
+
+      <div id="footermenu" class="inner">
+        <ul>
+        <li><a href="index.html">ホーム</a></li>
+        </ul>
+        <ul>
+        <li><%= link_to("お問い合わせ", contact_main_index_path) %></a></li>
+        </ul>
+      </div>
+      <!--/footermenu-->
+
+      <div id="copyright">
+      <small>Copyright&copy; <a href="http://global-inc.jp/">株式会社グローバル</a> All Rights Reserved.</small>
+      <span class="pr"><a href="https://template-party.com/" target="_blank">Web Design:Template-Party</a></span>
+      </div>
+
+    </footer>
+
+    <!--ページの上部に戻る「↑」ボタン-->
+    <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+
+    <!--メニュー開閉ボタン-->
+    <div id="menubar_hdr" class="close"></div>
+    <!--メニューの開閉処理条件設定　900px以下-->
+    <script>
+      if (OCwindowWidth() <= 900) {
+        open_close("menubar_hdr", "menubar-s");
+      }
+    </script>
+
+  </body>
+</html>

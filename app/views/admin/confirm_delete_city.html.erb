@@ -1,0 +1,22 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+	<section>
+		<%= form_with(model: @city, url: delete_city_admin_path, method: :POST) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>地区</th>
+					<td><%= f.hidden_field :city_name %><%= @city.city_name  %></td>
+				</tr>
+				<tr>
+					<th>関連する都道府県</th>
+					<td><%= f.hidden_field :prefecture_id %><%= @city.prefecture.prefecture %></td>
+				</tr>
+			</table>
+			<p class="c">
+				<%= f.submit "この地区を削除する", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>

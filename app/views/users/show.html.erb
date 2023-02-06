@@ -1,0 +1,42 @@
+<div id="main">
+
+<section>
+
+
+<table class="ta1">
+	<tr>
+		<th>お名前</th>
+		<td><%= @uaccount.user_name %></td>
+	</tr>
+	<tr>
+		<th>メールアドレス</th>
+		<td><%= @uaccount.email %></td>
+	</tr>
+	<tr>
+		<th>居宅介護支援事業所</th>
+		<td><%= @uaccount.user_office %></td>
+	</tr>
+	<tr>
+		<th>事業所　電話番号</th>
+		<td><%= @uaccount.user_phone %></td>
+	</tr>
+	<tr>
+		<th>お知らせ</th>
+		<td>
+			<%= check_box "",'', {checked: (true if @uaccount.commerce == "allow_send_mail"), disabled: true}, true, false %>
+			<%= "ソフトウェアのアップデート情報などのお知らせメールを希望します。"  %>
+		</td>
+	</tr>
+
+</table>
+
+<p class="c">
+	<% if @user_in %>
+		<%= link_to("編集", edit_user_path) %>
+	<% end %>
+</p>
+
+</section>
+
+</div>
+<!--/#main-->

@@ -1,0 +1,19 @@
+<div id="main">
+
+  <section>
+
+    <h2>ケアマネジャー　一覧表</h2>
+
+    <% @uaccounts.each do |uaccount| %>
+      <div class="list link">
+        <h4><%= uaccount.id %>　<%= uaccount.user_name %></h4>
+        <p>メール確認日:<%= uaccount.confirmed_at&.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[uaccount.confirmed_at.wday]}曜日) %H:%M") %></p>
+        <p>居宅介護支援事業所：<%= uaccount.user_office  %>　<%= uaccount.email %></p>
+        <p><%= button_to("ケアマネを削除する", delete_uaccount_confirm_admin_path(uaccount.id), method: :post, class: "button-v2") %></p>
+      </div>
+    <% end %>
+
+  </section>
+
+</div>
+<!--/#main-->

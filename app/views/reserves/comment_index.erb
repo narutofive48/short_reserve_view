@@ -1,0 +1,33 @@
+<div id="main">
+
+  <section>
+
+    <h2>予約状況一覧表</h2>
+    <p>新しいコメントが入っている予約リストです</p>
+
+    <% @reserves.each do |reserve| %>
+      <div class="list link">
+        <div class="listinboxA">
+          <div class="listinboxr2">
+            <h4><% reserve.office_id %><%= reserve.oaccount&.office_name %></h4>
+            <p><i class="zmdi zmdi-account"></i>　<%= "#{reserve.client_name}様" if reserve.client_name.present? %></p>
+            <p><%= link_to("予約期間#{reserve.start_date}〜#{reserve.end_date} コメント確認", reserve_show_reserf_path(reserve.id)) %></p>
+            <p>備考：<%= reserve.remark %></p>
+            <div style="display:inline-block; margin-right: 10px;"><%= button_to("予約を編集する", edit_reserf_path(reserve.id), class: "button-v1") %></div>
+            <div style="display:inline-block;"><%= button_to("予約を削除する", delete_confirm_reserf_path(reserve.id), class: "button-v2") %></div>
+
+          </div>
+          <div class="listinboxr3">
+            <br>
+            <p><i class="zmdi zmdi-phone"></i> <%= reserve.oaccount.office_phone %>
+            <p><i class="zmdi zmdi-car">迎え</i> <%= reserve.start_transfer.trans_flg %></p>
+            <p><i class="zmdi zmdi-car">送り</i> <%= reserve.end_transfer.trans_flg %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <%= paginate @reserves %>
+  </section>
+
+</div>
+<!--/#main-->

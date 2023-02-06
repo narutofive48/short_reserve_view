@@ -1,0 +1,8 @@
+<p>
+<%= @reserve.oaccount.office_name %> 様
+<%= @reserve.start_date %> 〜 <%= @reserve.end_date %>
+ケアマネジャー
+<%= @reserve.uaccount.user_name || @reserve.user_name %>様より
+新しい予約がありました
+事業所電話番号： <%= @reserve.uaccount.user_phone || @reserve.user_phone %>
+</p>

@@ -1,0 +1,22 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+	<section>
+		<%= form_with(model: @city, url: new_city_update_admin_index_path, method: :POST) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>地区</th>
+					<td><%= f.text_area :city_name, size: "5", class:"wl" %></td>
+				</tr>
+				<tr>
+					<th>関連する都道府県</th>
+					<td><%= f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture, size:30, class:"ws" %></td>
+				</tr>
+			</table>
+			<p class="c">
+				<%= f.submit "地区を追加する", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>

@@ -1,0 +1,23 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+	<section>
+		一斉メールを送信するケアマネは、ケアマネ登録の時に許可をもらった方に送信します
+		<%= form_with(model: @sendmail, url:all_uaccounts_send_admin_index_path , method: :POST) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>件名</th>
+					<td><%= f.hidden_field :subject%><%= @sendmail.subject %></td>
+				</tr>
+				<tr>
+					<th>本文</th>
+					<td><%= f.hidden_field :text %><%= @sendmail.text %></td>
+				</tr>
+			</table>
+			<p class="c">
+				<%= f.submit "一斉メールを送信する", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>

@@ -1,0 +1,86 @@
+<div id="main">
+
+	<section>
+
+		<%= form_with(model: @oaccount, url: confirm_office_path, method: :post) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>事業所名</th>
+					<td><%= f.text_field :office_name, size:30, class:"ws" %></td>
+				</tr>
+				<tr>
+					<th>事業所番号</th>
+					<td><%= f.text_field :office_num, size:30, class:"ws" %></td>
+				</tr>
+				<tr>
+					<th>地区</th>
+					<td><%= f.collection_select :office_city_id, City.eager_load(:prefecture).all, :id, :full_name, {include_blank: true}, class:"ws js-select2" %></td>
+				</tr>
+				<tr>
+					<th>住所</th>
+					<td><%= f.text_field :address, size:30, class:"ws" %></td>
+				</tr>
+				<tr>
+					<th>電話番号</th>
+					<td><%= f.text_field :office_phone, size:10, class:"ws" %></td>
+				</tr>
+				<tr>
+					<th>FAX番号</th>
+					<td><%= f.text_field :fax_num, size:10, class:"ws" %></td>
+				</tr>
+				<tr>
+					<th>ベッド数</th>
+					<td><%= f.number_field :office_bed_count, size:3 %></td>
+				</tr>
+				<tr>
+					<th>ベッド種類1</th>
+					<td><%= f.collection_select :office_bed_type, Bedtype.all, :id, :bed_type, size:10, class:"ws" %></td>
+				</tr>
+				<tr>
+					<th>ベッド種類2</th>
+					<td><%= f.collection_select :bed_type2_id, Bedtype.all, :id, :bed_type, size:10, class:"ws" %></td>
+				</tr>
+				<tr>
+					<th>送迎範囲</th>
+					<td><%= f.text_field :trance_area, size:30 %></td>
+				</tr>
+				<tr>
+					<th>医療行為について</th>
+					<td><%= f.text_field :medical_practice, size:30 %></td>
+				</tr>
+				<tr>
+					<th>施設のアピールポイント</th>
+					<td><%= f.text_area :office_apear, class: 'wl', size: "20x10"  %></td>
+				</tr>
+				<tr>
+					<th>ベッド管理開始日</th>
+					<td><%= f.date_field :startday, size:10 %></td>
+				</tr>
+				<tr>
+					<th>ホームページ</th>
+					<td><%= f.text_field :office_url, size:30, class:"ws" %></td>
+				</tr>
+				<tr>
+					<th>サムネイル画像</th>
+					<td><%= f.file_field :thumbnail %></td>
+				</tr>
+				<tr>
+					<th>申し込み用紙</th>
+					<td><%= f.file_field :pdf_info %></td>
+				</tr>
+				<tr>
+					<th>表示・予約の限界月数</th>
+					<td>予約ができる限界の月数です。3と入れれば3ヶ月先までしか予約を入れることができません<br>
+							<%= f.number_field :max_reservation_months %></td>
+				</tr>
+
+			</table>
+
+			<p class="c">
+				<%= f.submit "内容を確認する", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>
+<!--/#main-->

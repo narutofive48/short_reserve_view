@@ -1,0 +1,69 @@
+<div id="main">
+
+	<section>
+	  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+			<table class="ta1">
+			  <div class="button-modoru-box">
+        	<%= link_to "戻る", 'javascript:history.back()', method: :get, class: "button-modoru" %>
+        </div>
+				<tr>
+					<th>ケアマネジャー</th>
+					<td><%= @reserve.uaccount&.user_name %></td>
+				</tr>
+				<tr>
+					<th>ショートステイ事業所番号</th>
+					<td><%= @reserve.oaccount.office_name %></td>
+				</tr>
+				<tr>
+					<th>利用者名</th>
+					<td><%= @reserve.user_name || @reserve.client_name %></td>
+				</tr>
+				<tr>
+					<th>開始日</th>
+					<td><%= @reserve.start_date.strftime("%Y年%m月%d日") %></td>
+				</tr>
+				<tr>
+					<th>迎えの送迎</th>
+					<td><%= @reserve.start_transfer.trans_flg %></td>
+				</tr>
+				<tr>
+					<th>終了日</th>
+					<td><%= @reserve.end_date.strftime("%Y年%m月%d日") %></td>
+				</tr>
+
+				<tr>
+					<th>送りの送迎</th>
+					<td><%= @reserve.end_transfer.trans_flg %></td>
+				</tr>
+				<tr>
+					<th>過去に利用がありますか？</th>
+					<td><%= @reserve.past_use.past_use %></td>
+				</tr>
+				<tr>
+					<th>備考欄</th>
+					<td><%= @reserve.remark %></td>
+				</tr>
+			</table>
+			<h2>ショートステイ連絡ボード</h2>
+			<% @comments.each do |comment| %>
+				<% if comment.sender_flg == "uaccount_comment" then %>
+					<div class=comment_box_blue>
+						<%= @reserve.uaccount.user_name %><br>
+						<%= comment.comment %><br>
+						送信日：<%= comment.created_at.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[comment.created_at.wday]}曜日) %H:%M") %>
+						<div class="button-choise-end"><%= button_to("削除", reserf_comment_path(id: comment.id, reserf_id: @reserve.id), method: :delete) %></div>
+					</div>
+				<% else %>
+					<div class=comment_box_orange>
+						<%= @reserve.oaccount.office_name %><br>
+						<%= comment.comment %><br>
+						送信日：<%= comment.created_at.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[comment.created_at.wday]}曜日) %H:%M") %>
+					</div>
+				<% end %>
+			<% end %>
+
+	</section>
+
+</div>
+<!--/#main-->

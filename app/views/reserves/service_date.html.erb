@@ -1,0 +1,82 @@
+<div id="main">
+
+<section>
+
+<h2>サービスのご案内</h2>
+<p>サービスのご案内ページです。</p>
+<%= search_form_for(@q, url: service_date_reserves_path, method: :get) do |f| %>
+
+	<table class="ta1">
+		<caption class="c">施設検索</caption>
+		<tr>
+			<th>地区</th>
+			<td>
+				<%= f.collection_select :office_city_id_eq, City.eager_load(:prefecture).all, :id, :full_name, {include_blank: true} %>
+			</td>
+		</tr>
+
+		<tr>
+			<th>ベッドの種類</th>
+			<td>
+				<%= f.collection_select :office_bed_type_eq, Bedtype.all, :id, :bed_type, include_blank: true %>
+			</td>
+		</tr>
+
+		<tr>
+			<th>開始日</th>
+			<td>
+				<%= f.date_field :reserve_counts_date_gteq %>
+			</td>
+		</tr>
+		<tr>
+			<th>終了日</th>
+			<td>
+				<%= f.date_field :reserve_counts_date_lteq %>
+			</td>
+		</tr>
+	</table>
+		<p class="c">
+			<%= f.submit "検索する", class:"btn" %>
+		</p>
+	<% end %>
+
+	<% @oaccounts.each do |oaccounts| %>
+		<div class="list link">
+			<figure>
+				<%= link_to(main_path(oaccounts.id)) do %>
+					<% if oaccounts.thumbnail.attached? %>
+						<%= image_tag url_for(oaccounts.thumbnail) %>
+					<% else %>
+						<img src="/images/6.jpg" alt="">
+					<% end %>
+				<% end %>
+			</figure>
+			<div class="listinboxA">
+				<div class="listinbox2">
+					<h4><%= link_to(oaccounts.office_name, main_path(oaccounts.id)) %></h4>
+					<% if oaccounts.paid_oaccount == "paid_oaccount" %>
+						<p><%= link_to("ショートステイの空き状況はこちら", bed_show_reserf_path(oaccounts.id)) %></p>
+					<% end %>
+
+					<p><%= oaccounts.office_apear.truncate(65) %></p>
+				</div>
+				<div class="listinbox3">
+					<br>
+					<i class="zmdi zmdi-pin"></i> <%= oaccounts.office_city&.city_name %><br>
+					<i class="zmdi zmdi-home"></i> <%= oaccounts.office_bed_count %>床<br>
+					<i class="zmdi zmdi-hotel"></i> <%= oaccounts.bed_type&.bed_type %>
+					<% if @favorite_oaccount_ids.include?(oaccounts.id) %>
+						<%= button_to("お気に入り解除", destroy_favorites_path(oaccount_id: oaccounts.id), method: :delete ) %>
+					<% else %>
+						<%= button_to("お気に入り登録", favorites_path(oaccount_id: oaccounts.id), method: :post ) %>
+					<% end %>
+				</div>
+
+			</div>
+		</div>
+	<% end %>
+
+</section>
+
+</div>
+<!--/#main-->

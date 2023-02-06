@@ -1,0 +1,35 @@
+<div id="main">
+
+<section>
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+	<%= form_with(model: @uaccount, url: delete_uaccount_admin_path, method: :post) do |f| %>
+		<table class="ta1">
+			<tr>
+				<th>お名前</th>
+				<td><%= f.hidden_field :user_name %><%= @uaccount.user_name %></td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td><%= f.hidden_field :email %><%= @uaccount.email %></td>
+			</tr>
+			<tr>
+				<th>事業所名</th>
+				<td><%= f.hidden_field :user_office%><%= @uaccount.user_office %></td>
+			</tr>
+			<tr>
+				<th>電話番号</th>
+				<td><%= f.hidden_field :user_phone %><%= @uaccount.user_phone %></td>
+			</tr>
+		</table>
+		データを削除すると、このデータに関連した予約が表示されなくなり、エラーになる場合があります。
+		本当に消してもよろしいですか？
+		<p class="c">
+			<input type="submit" value="このケアマネを削除" class="btn">
+		</p>
+	<% end %>
+
+</section>
+
+</div>
+<!--/#main-->

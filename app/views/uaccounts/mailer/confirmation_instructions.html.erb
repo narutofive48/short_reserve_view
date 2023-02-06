@@ -1,0 +1,5 @@
+<p>Picotへようこそ <%= @email %>!</p>
+
+<p>仮登録ありがとうございます。本登録をするには下のメールアカウントの確認をクリックしてください。</p>
+
+<p><%= link_to 'メールアカウントの確認', confirmation_url(@resource, confirmation_token: @token) %></p>

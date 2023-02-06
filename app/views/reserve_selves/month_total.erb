@@ -1,0 +1,30 @@
+<div id="main">
+
+	<section>
+
+		<div class="button-modoru-box">
+			<%= link_to "戻る", 'javascript:history.back()', method: :get, class: "button-modoru" %>
+		</div>
+		<h2>統計資料</h2>
+			<p>ケアマネジャーごとの予約件数と使用日数</p>
+		<% @reserves.each do |month, reserves| %>
+			<%= month.strftime("%Y年%m月") %>
+				<table class="ta1">
+					<tr>
+						<th>ケアマネジャー</th>
+						<th>予約件数</th>
+						<th>使用日数</th>
+					</tr>
+					<% reserves.each do |value| %>
+						<tr>
+							<td><%= @uaccounts[value["user_id"]]&.user_name || "事業所入力" %></td>
+							<td><%= value["count"] %>件</td>
+							<td><%= value["days"] %>日</td>
+						</tr>
+					<% end %>
+			</table>
+		<% end %>
+	</section>
+
+</div>
+<!--/#main-->

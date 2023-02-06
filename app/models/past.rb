@@ -1,0 +1,2 @@
+class Past < ApplicationRecord
+end

@@ -1,0 +1,53 @@
+<div id="main">
+
+	<section>
+  	<p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+		<%= form_with(model: @oaccount, url: delete_office_admin_path, method: :post) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>事業所名</th>
+					<td><%= f.hidden_field :office_name %><%= @oaccount.office_name %></td>
+				</tr>
+				<tr>
+					<th>e-mail</th>
+					<td><%= f.hidden_field :email %><%= @oaccount.email %></td>
+				</tr>
+				<tr>
+					<th>住所（市町村名）</th>
+					<td><%= f.hidden_field :office_city_id %><%= @oaccount.office_city_id %>　<% @city=City.find(@oaccount.office_city_id) %><%= @city.city_name %></td>
+				</tr>
+				<tr>
+					<th>電話番号</th>
+					<td><%= f.hidden_field :office_phone %><%= @oaccount.office_phone %></td>
+				</tr>
+
+				<tr>
+					<th>ホームページ</th>
+					<td><%= f.hidden_field :office_url %><%= @oaccount.office_url %></td>
+				</tr>
+				<tr>
+					<th>ベッド数</th>
+					<td><%= f.hidden_field :office_bed_count %><%= @oaccount.office_bed_count %></td>
+				</tr>
+				<tr>
+					<th>ベッド種類</th>
+					<td><%= f.hidden_field :office_bed_type %> <%= @oaccount.bed_type&.bed_type %></td>
+				</tr>
+
+				<tr>
+					<th>施設のアピールポイント</th>
+					<td><%= f.hidden_field :office_apear %><%= @oaccount.office_apear %></td>
+				</tr>
+			</table>
+			このデータを削除すると、「予約してあるデータが表示されない」、
+			「エラーがでる」などの不具合が発生する場合があります。
+			本当に消してもいいですか？
+			<p class="c">
+				<%= f.submit "この事業所を削除する", class: "btn", disable_with: '保存中' %>
+			</p>
+		<% end %>
+	</section>
+
+</div>
+<!--/#main-->

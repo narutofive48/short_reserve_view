@@ -1,0 +1,30 @@
+<div id="main">
+
+  <section>
+
+    <h2>承認済み予約状況一覧表</h2>
+    <p>施設に承認されたリストです</p>
+    <p>予約を取り消すためには、事業所に連絡をとり、承認をキャンセルしてもらってから、予約をキャンセルしましょう</p>
+
+    <% @reserves.each do |reserve| %>
+      <div class="list link">
+        <div class="listinboxA">
+          <div class="listinboxr2">
+            <h4>№<%= reserve.id %>　<%= reserve.oaccount.office_name %></h4>
+            <p><%= link_to("予約期間#{reserve.start_date}〜#{reserve.end_date}", reserve_show_reserf_path(reserve.id)) %></p>
+            <p>備考：<%= reserve.remark %></p>
+          </div>
+          <div class="listinboxr3">
+            <br>
+            <p><i class="zmdi zmdi-phone"></i> <%= reserve.oaccount.office_phone %>
+            <p><i class="zmdi zmdi-car">迎え</i> <%= reserve.start_transfer.trans_flg %></p>
+            <p><i class="zmdi zmdi-car">送り</i> <%= reserve.end_transfer.trans_flg %></p>
+          </div>
+        </div>
+       </div>
+    <% end %>
+    <%= paginate @reserves %>
+  </section>
+
+</div>
+<!--/#main-->

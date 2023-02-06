@@ -1,0 +1,35 @@
+			<div id="main">
+
+				<!--スライドショー-->
+				<section>
+
+					<h2>管理用画面です</h2>
+
+					<h3>ショートステイ事業所の登録はこちらから入力してください</h3>
+					<p><%= link_to("事業所の一覧及び修正・削除はこちら", info_delete_admin_index_path ) %></p>
+          <p><%= link_to("新規事業所登録はこちら", new_oaccount_registration_path ) %></p>
+          <p><%= link_to("ケアマネに一斉にメールを送信する", mail_all_send_admin_index_path ) %></p>
+
+					<h3>ケアマネの編集及び削除はこちらから行ってください</h3>
+					<p><%= link_to("ケアマネの一覧及び削除はこちら", uaccount_index_admin_index_path ) %></p>
+
+					<h3>県の入力はこちらから入力してください</h3>
+          <p><%= link_to("県の編集はこちら", admin_prefectures_path ) %></p>
+					<p><%= link_to("県の新規追加はこちら", new_admin_prefecture_path ) %></p>
+
+					<h3>市区町村の入力はこちらから入力してください</h3>
+          <p><%= link_to("地区の編集はこちら", city_index_admin_index_path ) %></p>
+          <p><%= link_to("地区の新規追加はこちら", new_city_admin_index_path ) %></p>
+
+					<h3>ベッド種類の入力はこちらから入力してください</h3>
+          <p><%= link_to("ベッド種類の編集はこちら", bedtype_index_admin_index_path ) %></p>
+          <p><%= link_to("ベッド種類の新規追加はこちら", new_bedtype_admin_index_path ) %></p>
+
+					<h3>全ての予約情報を確認する場合はこちら</h3>
+          <p><%= link_to("予約情報の一覧はこちら", reserves_index_admin_index_path ) %></p>
+
+				</section>
+
+
+			</div>
+			<!--/#main-->

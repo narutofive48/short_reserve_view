@@ -1,0 +1,94 @@
+<div id="main">
+
+	<section>
+
+		<table class="ta1">
+			<tr>
+				<th>事業所名</th>
+				<td><%= @oaccount.office_name %></td>
+			</tr>
+			<tr>
+				<th>事業所番号</th>
+				<td><%= @oaccount.office_num %></td>
+			</tr>
+			<tr>
+				<th>地区</th>
+				<td><%= @oaccount.office_city&.full_name %></td>
+			</tr>
+			<tr>
+				<th>住所</th>
+				<td><%= @oaccount.address %></td>
+			</tr>
+			<tr>
+				<th>事業所電話番号</th>
+				<td><%= @oaccount.office_phone %></td>
+			</tr>
+			<tr>
+				<th>事業所FAX番号</th>
+				<td><%= @oaccount.fax_num %></td>
+			</tr>
+			<tr>
+				<th>ベッド数</th>
+				<td><%= @oaccount.office_bed_count %></td>
+			</tr>
+			<tr>
+				<th>ベッド種類1</th>
+				<td><%= @oaccount.bed_type&.bed_type %></td>
+			</tr>
+			<tr>
+				<th>ベッド種類2</th>
+				<td><%= @oaccount.bed_type2&.bed_type %></td>
+			</tr>
+			<tr>
+				<th>送迎範囲</th>
+				<td><%= @oaccount.trance_area %></td>
+			</tr>
+			<tr>
+				<th>医療行為について</th>
+				<td><%= @oaccount.medical_practice %></td>
+			</tr>
+			<tr>
+				<th>事業所のアピールポイント</th>
+				<td><%= safe_join(@oaccount.office_apear.split("\n"),tag(:br)) if @oaccount.office_apear.present? %></td>
+			</tr>
+			<tr>
+				<th>ベッド管理開始日</th>
+				<td><%= @oaccount.startday&.strftime("%Y年%m月%d日(%a)") %></td>
+			</tr>
+			<tr>
+				<th>事業所URL</th>
+				<td><%= link_to(@oaccount.office_url, @oaccount.office_url, target: "_blank") %></td>
+			</tr>
+			<tr>
+				<th>画像サムネイル</th>
+				<td>
+					<% if @oaccount.thumbnail.attached? %>
+						<%= image_tag @oaccount.thumbnail %>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<th>申し込み用紙</th>
+				<td>
+					<% if @oaccount.pdf_info.attached? %>
+						<%= link_to("表示する", url_for(@oaccount.pdf_info), target: "_blank") %>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<th>表示・予約の月数</th>
+				<td><%= @oaccount.max_reservation_months %></td>
+			</tr>
+
+		</table>
+
+		<p class="c">
+			<% if @office_in %>
+				<%= link_to("編集", edit_office_path(@current_oaccount.id)) %>
+			<% end %>
+		</p>
+
+	</section>
+
+</div>
+<!--/#main-->

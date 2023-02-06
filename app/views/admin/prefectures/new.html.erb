@@ -1,0 +1,18 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+	<section>
+		<%= form_with(model: @prefecture, url: admin_prefectures_path, method: :POST) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>都道府県</th>
+					<td><%= f.text_area :prefecture, size: "10", class:"wl" %></td>
+				</tr>
+			</table>
+			<p class="c">
+				<%= f.submit "都道府県を新規追加する", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>

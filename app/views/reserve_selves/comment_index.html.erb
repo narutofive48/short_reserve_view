@@ -1,0 +1,32 @@
+<div id="main">
+
+  <section>
+
+    <h2>予約状況一覧表</h2>
+    <p>新しいコメントが入っている予約リストです</p>
+
+    <% @reserves.each do |reserve| %>
+      <div class="list link">
+        <div class="listinboxA">
+          <div class="listinboxr2">
+            <h4><% reserve.user_id %>  <%= reserve.display_user_name %></h4>
+            <p><i class="zmdi zmdi-account"></i>　<%= "#{reserve.client_name}様" if reserve.client_name.present? %></p>
+            <p><%= link_to("予約期間#{reserve.start_date}〜#{reserve.end_date}", reserve_show_reserve_self_path(reserve.id)) %>
+            <p>備考 <%= reserve.remark %></p>
+          </div>
+          <div class="listinboxr3">
+            <i class="zmdi zmdi-city"></i> <%= reserve.display_user_office %><br>
+            <i class="zmdi zmdi-phone"></i> <%= reserve.display_user_phone %><br>
+            予約日： <%= reserve.created_at.strftime("%Y/%m/%d") %>
+          </div>
+        </div>
+        <div class="button-choise"><%= button_to("予約を承認する　", permit_confirm_reserve_self_path(reserve.id), class: "button-v1") %></div>
+        <div class="button-choise"><%= button_to("利用中に日付変更", edit_reserve_self_path(reserve.id), class: "button-v3") %></div>
+        <div class="button-choise-end"><%= button_to("予約を承認しない", decline_confirm_reserve_self_path(reserve.id), class: "button-v2") %></div>
+      </div>
+    <% end %>
+
+  </section>
+
+</div>
+<!--/#main-->

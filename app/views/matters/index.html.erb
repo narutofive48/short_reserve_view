@@ -1,0 +1,24 @@
+<div id="main">
+
+  <section>
+
+    <h2>依頼内容一覧表</h2>
+    <p>施設に依頼したいショートステイの案件を掲示板に載せます。</p>
+    <p><%= link_to("新しい依頼", new_matter_path) %></p>
+
+    <% @matters.each do |matter| %>
+      <div class="list link">
+        <div class="listinboxA">
+          <h4>依頼番号<%= matter.id %>　<%= matter.uaccount.user_name %></h4>
+          <p><%= link_to("予約期間#{matter.start_date}〜#{matter.end_date}", matter_path(matter.id),method: :GET) %></p>
+          <p>概要：<%= matter.remark %></p>
+          <div style="display:inline-block; margin-right: 10px;"><%= button_to("依頼を編集する", edit_matter_path(matter.id), class: "button-v1") %></div>
+          <div style="display:inline-block;"><%= button_to("依頼を削除する", destroy_confirm_matter_path(matter.id), class: "button-v2") %></div>
+        </div>
+      </div>
+    <% end %>
+  <%= paginate @matters %>
+  </section>
+
+</div>
+<!--/#main-->

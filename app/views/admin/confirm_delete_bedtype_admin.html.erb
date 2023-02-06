@@ -1,0 +1,19 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+	<section>
+		<%= form_with(model: @bedtype, url: delete_bedtype_admin_path, method: :POST) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>ベッドの種類</th>
+					<td><%= f.hidden_field :bed_type %><%= @bedtype.bedtype %></td>
+				</tr>
+			</table>
+			<p class="c">
+				<%= "これを削除すると元に戻せません。また消すことにより画面が表示されなくなることがあります。" %>
+				<%= f.submit "ベッドの種類を削除する", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>

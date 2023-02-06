@@ -1,0 +1,44 @@
+<div id="main">
+  <article>
+    <h2>詳細ページ</h2>
+
+    <!-- <p class="c"><%= @oaccount.office_name%>の空き状況</p>  -->
+    <h3><%= @oaccount.office_name%>の空き状況(詳細)</h3>
+
+    <!-- <figure class="mb30"><img src="images/sample1.jpg" alt="ここにショートステイの絵を入れる"></figure> -->
+    <table class="ta1">
+      <caption>詳細情報</caption>
+      <tr>
+      <th>ベッド数</th>
+      <td><%= @oaccount.office_bed_count %>床</td>
+      </tr>
+      <tr>
+      <th>部屋の種類</th>
+      <td>個室</td>
+      </tr>
+    </table>
+    すでに利用が決まっているベッド数を入力してください
+    <%= form_with(model: @forms, url: bed_article_confirm_office_path, scope: :reserve_counts) do |reserve_count_form| %>
+      <% @calendars.each do |calendar| %>
+        <%= month_calendar(start_date: calendar[:beginning_of_month]) do |date| %>
+          <%= date.strftime("%m/%d") %><br>
+          <% if Date.today > date %>
+            <%= "-" %>
+          <% else %>
+            <%= link_to(calendar[:reserve_statuses][date][:count], new_reserve_self_path(date: date.strftime("%Y-%m-%d"))) %>
+            <br>
+            <%= link_to("利用一覧", permit_index_reserve_self_path(reserve_search_condition: {date: date.strftime("%Y-%m-%d")})) %>
+            <br>
+            <%= reserve_count_form.fields_for("reserve_counts", reserve_count_form.object[date], index: @forms.values.index(reserve_count_form.object[date])) do |f| %>
+              <%= f.hidden_field :date %>
+              <%= f.text_field :disable_bed_count, size: "3" %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= reserve_count_form.submit "確認画面へ" %>
+        <br>
+      <% end %>
+    <% end %>
+  </article>
+</div>
+<!--/#main -->

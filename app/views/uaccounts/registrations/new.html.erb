@@ -1,0 +1,54 @@
+<div id="main">
+  <h2>新規登録</h2>
+  ケアマネジャーさんが普段使っているメールアドレスで登録してください<br>
+  居宅介護支援事業所のメールアドレスを使用して、一括で管理することも可能です
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "uaccounts/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      メールアドレス（<%= f.label :email %>）<br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", size:30 %>
+    </div>
+
+    <div class="field">
+      パスワード（<%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em><%= @minimum_password_length %> 文字以上</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+
+    <div class="field">
+      パスワードの確認（<%= f.label :password_confirmation %>）<br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+
+    <div class="field">
+      お名前（<%= f.label :user_name %>） <br />
+      <%= f.text_field :user_name, autocomplete: "user_name" %>
+    </div>
+
+    <div class="field">
+      居宅介護支援事業所名（<%= f.label :user_office %>） <br />
+      <%= f.text_field :user_office, autocomplete: "user_office", size:50  %>
+    </div>
+
+    <div class="field">
+      事業所電話番号（<%= f.label :user_phone %>） <br />
+      <%= f.text_field :user_phone, autocomplete: "user_phone" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :commerce, {checked: true}, "allow_send_mail", "deny_send_mail" %>
+      <%= f.label :commerce,"ソフトウェアのアップデート情報などのお知らせメールを希望します。" %>
+    </div>
+
+     <%= recaptcha_tags %>
+
+    <div class="actions">
+      <%= f.submit "新規登録" %>
+    </div>
+  <% end %>
+
+  <%= render "uaccounts/shared/links" %>
+</div>

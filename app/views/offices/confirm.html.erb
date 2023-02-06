@@ -1,0 +1,96 @@
+<div id="main">
+
+	<section>
+
+		<%= form_with(model: @oaccount, url: office_path, method: :patch) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>事業所名</th>
+					<td><%= f.hidden_field :office_name %><%= @oaccount.office_name %></td>
+				</tr>
+				<tr>
+					<th>事業所番号</th>
+					<td><%= f.hidden_field :office_num %><%= @oaccount.office_num %></td>
+				</tr>
+				<tr>
+					<th>地区</th>
+					<td><%= f.hidden_field :office_city_id %><%= @oaccount.office_city_id %>　<% @city=City.find(@oaccount.office_city_id) %><%= @city.city_name %></td>
+				</tr>
+				<tr>
+					<th>住所</th>
+					<td><%= f.hidden_field :address %><%= @oaccount.address %></td>
+				</tr>
+				<tr>
+					<th>電話番号</th>
+					<td><%= f.hidden_field :office_phone %><%= @oaccount.office_phone %></td>
+				</tr>
+				<tr>
+					<th>FAX番号</th>
+					<td><%= f.hidden_field :fax_num %><%= @oaccount.fax_num %></td>
+				</tr>
+				<tr>
+					<th>ベッド数</th>
+					<td><%= f.hidden_field :office_bed_count %><%= @oaccount.office_bed_count %></td>
+				</tr>
+				<tr>
+					<th>ベッド種類1</th>
+					<td><%= f.hidden_field :office_bed_type %><%= @oaccount.bed_type&.bed_type %></td>
+				</tr>
+				<tr>
+					<th>ベッド種類2</th>
+					<td><%= f.hidden_field :bed_type2_id %><%= @oaccount.bed_type2&.bed_type %></td>
+				</tr>
+				<tr>
+					<th>送迎範囲</th>
+					<td><%= f.hidden_field :trance_area %><%= @oaccount.trance_area %></td>
+				</tr>
+				<tr>
+					<th>医療行為について</th>
+					<td><%= f.hidden_field :medical_practice %><%= @oaccount.medical_practice %></td>
+				</tr>
+				<tr>
+					<th>ホームページ</th>
+					<td><%= f.hidden_field :office_url %><%= @oaccount.office_url %></td>
+				</tr>
+				<tr>
+					<th>施設のアピールポイント</th>
+					<td><%= f.hidden_field :office_apear %><%= safe_join(@oaccount.office_apear.split("\n"),tag(:br)) %></td>
+				</tr>
+				<tr>
+					<th>ベッド管理開始日</th>
+					<td><%= f.hidden_field :startday %><%= @oaccount.startday %></td>
+				</tr>
+				<tr>
+					<th>画像サムネイル</th>
+					<td>
+						<% if f.object.thumbnail.attached? %>
+							<%= f.hidden_field :thumbnail, value: f.object.thumbnail.signed_id %>
+							<%= image_tag f.object.thumbnail %>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<th>申し込み</th>
+					<td>
+						<% if f.object.pdf_info.attached? %>
+							<%= f.hidden_field :pdf_info, value: f.object.pdf_info.signed_id %>
+							<iframe src="<%= url_for(@oaccount.pdf_info) %>">
+							</iframe>
+
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<th>表示・予約の限界月数</th>
+					<td><%= f.hidden_field :max_reservation_months %><%= @oaccount.max_reservation_months %></td>
+				</tr>
+			</table>
+
+			<p class="c">
+				<%= f.submit "内容を保存する", class: "btn", disable_with: '保存中' %>
+			</p>
+		<% end %>
+	</section>
+
+</div>
+<!--/#main-->

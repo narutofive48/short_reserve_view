@@ -1,0 +1,15 @@
+<p>
+  <%= @reserve.uaccount.user_name %> 様
+</p>
+<p>
+　この予約について、施設から承認されました
+</p>
+<p>
+  <%= @reserve.oaccount.office_name %>
+</p>
+<p>
+  電話番号：<%= @reserve.oaccount.office_phone %>
+</p>
+<p>
+  <%= @reserve.start_date %> 〜 <%= @reserve.end_date %>
+</p>

@@ -1,0 +1,56 @@
+<div id="main">
+
+	<section>
+
+		<%= form_with(model: @reserve, url: edit_update_reserf_path, method: :post) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>ケアマネジャー</th>
+					<td><%= f.hidden_field :user_id %><%= @reserve.uaccount.user_name %></td>
+				</tr>
+				<tr>
+					<th>ショートステイ事業所番号</th>
+					<td><%= f.hidden_field :office_id %><%= @reserve.oaccount.office_name %></td>
+				</tr>
+				<tr>
+					<th>利用者名</th>
+					<td><%= f.hidden_field :client_name %><%= @reserve.client_name %>様</td>
+				</tr>
+				<tr>
+					<th>開始日</th>
+					<td><%= f.hidden_field :start_date %><%= @reserve.start_date %></td>
+				</tr>
+				<tr>
+					<th>迎えの送迎</th>
+					<td><%= f.hidden_field :start_transfer_id %><%= @reserve.start_transfer.trans_flg %></td>
+				</tr>
+				<tr>
+					<th>終了日</th>
+					<td><%= f.hidden_field :end_date %><%= @reserve.end_date %></td>
+				</tr>
+
+				<tr>
+					<th>送りの送迎</th>
+					<td><%= f.hidden_field :end_transfer_id %><%= @reserve.end_transfer.trans_flg %></td>
+				</tr>
+				<tr>
+					<th>過去に利用がありますか？</th>
+					<td><%= f.hidden_field :past_use_id %><%= @reserve.past_use.past_use %></td>
+				</tr>
+				<tr>
+					<th>備考欄</th>
+					<td><%= f.hidden_field :remark %><%= @reserve.remark %></td>
+				</tr>
+			</table>
+			<!-- entry_flg 表示せずに、flg="no_entry_statusを入れます-->
+			<%= f.hidden_field :entry_flg %>
+
+
+			<p class="c">
+				<%= f.submit "保存する", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>
+<!--/#main-->

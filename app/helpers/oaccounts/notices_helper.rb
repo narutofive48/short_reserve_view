@@ -1,0 +1,2 @@
+module Oaccounts::NoticesHelper
+end

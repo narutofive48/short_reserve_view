@@ -1,0 +1,19 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+  <section>
+
+    <h2>都道府県一覧表</h2>
+
+    <% @prefectures.each do |prefecture| %>
+      <div class="list link">
+        <h4><%= prefecture.id %>　<%= prefecture.prefecture %></h4>
+        <p><%= link_to("都道府県を編集する", edit_admin_prefecture_path(prefecture.id)) %></p>
+        <p><%= button_to("都道府県を削除する", confirm_delete_admin_prefecture_path(prefecture.id), method: :post, class: "button-v2") %></p>
+      </div>
+    <% end %>
+
+  </section>
+
+</div>
+<!--/#main-->

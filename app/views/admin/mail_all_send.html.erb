@@ -1,0 +1,22 @@
+<div id="main">
+  <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+	<section>
+		<%= form_with(model: @sendmail, url:mail_all_send_confirm_admin_index_path , method: :POST) do |f| %>
+			<table class="ta1">
+				<tr>
+					<th>件名</th>
+					<td><%= f.text_field :subject, size: "30", class:"wl" %></td>
+				</tr>
+				<tr>
+					<th>本文</th>
+					<td><%= f.text_area :text, size: "30x5", class:"wl" %></td>
+				</tr>
+			</table>
+			<p class="c">
+				<%= f.submit "送信内容を確認する", class:"btn" %>
+			</p>
+		<% end %>
+	</section>
+
+</div>

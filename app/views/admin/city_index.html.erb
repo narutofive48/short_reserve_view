@@ -1,0 +1,20 @@
+<div id="main">
+
+  <section>
+    <p><%= link_to("管理画面TOPに戻る", admin_home_index_path ) %></p>
+
+    <h2>地区一覧表</h2>
+
+    <% @cities.each do |city| %>
+      <div class="list link">
+        <h4><%= city.id %>　<%= city.city_name %></h4>
+        <p>都道府県 <%= city.prefecture_id %> <%= city.prefecture.prefecture %></p>
+        <p><%= link_to("地区を編集する", edit_city_admin_path(city.id)) %></p>
+        <p><%= button_to("地区を削除する", confirm_delete_city_admin_path(city.id), method: :post, class: "button-v2") %></p>
+      </div>
+    <% end %>
+
+  </section>
+
+</div>
+<!--/#main-->
